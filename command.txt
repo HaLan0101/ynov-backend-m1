@@ -1,0 +1,4 @@
+npm install cors
+npm i bcrypt
+npm install jsonwebtoken
+npm install dotenv --save
