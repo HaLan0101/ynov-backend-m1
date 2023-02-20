@@ -33,6 +33,14 @@ exports.getPlaces = (req, res) => {
       res.status(400).send(err)
     })
 }
+exports.getPlace = (req, res) => {
+    Place.findById(req.params.id)
+    .then((place)=>{
+        res.send(place)
+    }).catch((err)=> {
+        res.status(400).send(err);
+    })
+}
 exports.getMyPlaces = (req, res) =>{
     User.findById(req.userToken.id).populate('places')
     .then( (user) =>{
