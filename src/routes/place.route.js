@@ -6,7 +6,7 @@ const verifyToken = require('../middlewares/verifyToken');
 router.get('/', placeController.getPlaces);
 router.get('/:id', placeController.getPlace);
 router.get('/search/:search', placeController.searchPlaces);
-router.get('/filter', placeController.filterPlaces);
+router.get('/filter/places', placeController.filterPlaces);
 router.post('/', verifyToken, verifyOwner,placeController.createPlace);
 router.get('/myPlaces', verifyToken, verifyOwner,placeController.getMyPlaces);
 router.get('/my/:id', verifyToken,verifyOwner,placeController.getMyPlace);

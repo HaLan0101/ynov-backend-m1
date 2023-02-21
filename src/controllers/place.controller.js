@@ -134,16 +134,14 @@ exports.searchPlaces = (req,res) =>{
 }
 exports.filterPlaces = async (req,res) => {
   const filter = {}
-  if(req.query.capacity){
-    const str = req.query.capacity.split('-')
+  if(req.query.capacityMin && req.query.capacityMax){
     filter.capacity = {
-      '$gte': parseInt(str[0]), '$lte': parseInt(str[1])
+      '$gte': parseInt(req.query.capacityMin), '$lte': parseInt(req.query.capacityMax)
     }
   }
-  if(req.query.price){
-    const str1 = req.query.price.split('-') 
+  if(req.query.priceMin && req.query.priceMax){
     filter.price = {
-        '$gte': parseInt(str1[0]), '$lte': parseInt(str1[1])
+        '$gte': parseInt(req.query.priceMin), '$lte': parseInt(req.query.priceMax)
     }
   } 
   if(req.query.types){
