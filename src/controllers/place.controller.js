@@ -10,10 +10,12 @@ exports.createPlace = (req, res) => {
       async (place) => {
         console.log("new", place._id);
         try {
+          var query = {"owner": req.userToken.id }
           const user = await User.findById(req.userToken.id);
           console.log(req.userToken);
           user.places.push(place._id);
           user.save();
+          await Place.findByIdAndUpdate(place._id, query);
           res.send(place);
         }
         catch (err) {
@@ -49,14 +51,6 @@ exports.getMyPlaces = (req, res) =>{
     .catch(err => {
       res.status(400).send(err)
     })
-    // Place.find({owner: req.userToken.id})
-    //       .then((places) => {
-    //           res.send(places)
-    //         }
-    //       )
-    //       .catch(err => {
-    //         res.status(400).send(err)
-    //       })
 }
 exports.getMyPlace = (req,res) =>{
   User.findById(req.userToken.id).populate('places')
