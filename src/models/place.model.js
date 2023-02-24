@@ -43,7 +43,7 @@ const placeSchema = mongoose.Schema({
     },
     gps: {
       lat: Number,
-      long:Number
+      long: Number
     }
   }
 })
