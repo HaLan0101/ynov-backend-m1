@@ -9,7 +9,7 @@ router.get('/search/:search', placeController.searchPlaces);
 router.get('/filter/places', placeController.filterPlaces);
 router.post('/', verifyToken, verifyOwner,placeController.createPlace);
 router.get('/myPlaces/get/', verifyToken, verifyOwner,placeController.getMyPlaces);
-router.get('/my/:id', verifyToken,verifyOwner,placeController.getMyPlace);
+router.get('/myPlaces/:id', verifyToken,verifyOwner,placeController.getMyPlace);
 router.put('/:id', verifyToken,verifyOwner,placeController.updateMyPlace);
 router.delete('/:id', verifyToken,verifyOwner,placeController.deleteMyPlace);
 

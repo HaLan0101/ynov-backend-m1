@@ -2,9 +2,6 @@ const Place = require('../models/place.model');
 const Typeplace = require('../models/typePlace.model');
 const User = require("../models/user.model.js");
 exports.createPlace = (req, res) => {
-  // const newPlace = new Place({
-  //   name: req.body.name
-  // })
   Place.create(req.body)
     .then(
       async (place) => {
@@ -12,7 +9,6 @@ exports.createPlace = (req, res) => {
         try {
           var query = {"owner": req.userToken.id }
           const user = await User.findById(req.userToken.id);
-          console.log(req.userToken);
           user.places.push(place._id);
           user.save();
           await Place.findByIdAndUpdate(place._id, query);
@@ -57,7 +53,6 @@ exports.getMyPlace = (req,res) =>{
     .then( (user) =>{
       user.places.forEach(place => {
         if(place._id.toString() === req.params.id) {
-            console.log(typeof place);
             res.send(place)
         }
     });
@@ -141,7 +136,6 @@ exports.filterPlaces = async (req,res) => {
   if(req.query.types){
     filter.types = req.query.types
   }
-  console.log(filter)
   Place.find(filter)
 
   .then(places => res.json(places))

@@ -19,7 +19,8 @@ const placeSchema = mongoose.Schema({
   },
   price : Number,
   rating: {
-    type : Number
+    type : Number,
+    default: 0
   },
   images: [String],
   capacity: {
