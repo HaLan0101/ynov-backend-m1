@@ -5,7 +5,6 @@ exports.createPlace = (req, res) => {
   Place.create(req.body)
     .then(
       async (place) => {
-        console.log("new", place._id);
         try {
           var query = {"owner": req.userToken.id }
           const user = await User.findById(req.userToken.id);

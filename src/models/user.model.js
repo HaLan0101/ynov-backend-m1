@@ -40,6 +40,12 @@ const userSchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Place"
         }
+    ],
+    booking: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Booking"
+        }
     ]
 })
 module.exports=mongoose.model('User',userSchema)
