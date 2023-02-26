@@ -34,9 +34,16 @@ exports.getPlaces = (req, res) => {
 exports.getPlace = (req, res) => {
     Place.findById(req.params.id)
     .then((place)=>{
-        res.send(place)
-    }).catch((err)=> {
-        res.status(400).send(err);
+      Typeplace.findById(place.types)
+      .then((typePlace) =>{
+        User.findById(place.owner)
+        .then((user)=>{
+          res.send({place,typePlace,user})
+        })     
+      })
+    })
+    .catch((err)=> {
+      res.status(400).send(err);
     })
 }
 exports.getMyPlaces = (req, res) =>{

@@ -22,6 +22,7 @@ exports.getTypePlace = (req, res) => {
     res.status(400).send(err)
   })
 }
+
 exports.updateTypePlace = (req,res) =>{
   TypePlace.findOneAndUpdate({_id: req.params.id}, req.body, { new: true })
   .then((typePlace)=>{
