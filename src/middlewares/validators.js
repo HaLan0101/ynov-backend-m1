@@ -47,7 +47,7 @@ exports.checkAuth = [
         //     .then(() => {
         //         return Promise.reject('Email already taken')
         //     })
-        // })   
+        // }) 
 ]
 exports.validation = (req,res, next) =>{
     const errors = validationResult(req);

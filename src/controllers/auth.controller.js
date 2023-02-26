@@ -7,6 +7,7 @@ exports.register = (req, res,next) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
+    type: req.body.type,
     password: hashedPassword
   })
   newUser.save()
