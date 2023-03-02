@@ -41,7 +41,13 @@ const userSchema = mongoose.Schema({
             ref: "Place"
         }
     ],
-    booking: [
+    bookings: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Booking"
+        }
+    ],
+    bookingsOwner: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Booking"

@@ -13,7 +13,7 @@ const bookingSchema = mongoose.Schema({
         type: Date,
         required: true
     },
-    user: {
+    client: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     }, 
@@ -28,7 +28,7 @@ const bookingSchema = mongoose.Schema({
     status : {
         type: String,
         enum : ['WAITING','ACCEPTED','CANCELLED'],
-        default: "WAITINGs",
+        default: "WAITING",
         required: true
     }
 })

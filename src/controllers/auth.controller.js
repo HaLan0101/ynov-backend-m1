@@ -16,7 +16,8 @@ exports.register = (req, res,next) => {
       //renvoyer en réponse uniquement le token
       const userToken = signJwt({
         id: user._id, 
-        isAdmin : user.isAdmin
+        isAdmin : user.isAdmin,
+        type : user.type
       }, process.env.JWT_SECRET)
       res.send({
         token: userToken
@@ -46,7 +47,8 @@ exports.login = (req,res) => {
         }
         const userToken = signJwt({
           id: user._id, 
-          isAdmin : user.isAdmin
+          isAdmin : user.isAdmin,
+          type : user.type
         }, process.env.JWT_SECRET)
         res.send({
           auth: true,

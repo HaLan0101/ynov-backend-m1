@@ -31,16 +31,10 @@ exports.getPlaces = (req, res) => {
     })
 }
 exports.getPlace = (req, res) => {
-    Place.findById(req.params.id)
+    Place.findById(req.params.id).populate('owner').populate('types')
     .then((place)=>{
-      Typeplace.findById(place.types)
-      .then((typePlace) =>{
-        User.findById(place.owner)
-        .then((user)=>{
-          res.send({place,typePlace,user})
-        })     
-      })
-    })
+          res.send({place})
+    })     
     .catch((err)=> {
       res.status(400).send(err);
     })
