@@ -13,6 +13,10 @@ exports.createReservation = (req, res) => {
               Booking.findOneAndDelete(booking._id)
               .then(booking => res.send({ message: "You can't not make a reservation on your place"}))
             }
+            else if (req.userToken.isAdmin){
+              Booking.findOneAndDelete(booking._id)
+              .then(booking => res.send({ message: "Admin can't not make a reservation"}))
+            }
             else{
               const user = await User.findById(req.userToken.id);
               user.bookings.push(booking._id);
@@ -34,7 +38,7 @@ exports.createReservation = (req, res) => {
 exports.getBookings = (req, res) => {
   Booking.find().populate('owner').populate('client').populate('place')
   .then((bookings) => {
-      res.send(bookings)
+      res.send({bookings})
     }
   )
   .catch(err => {
@@ -42,18 +46,18 @@ exports.getBookings = (req, res) => {
   })
 }
 exports.getMyBookings = (req, res) =>{
-  User.findById(req.userToken.id).populate('bookings')
-  .then( (user) =>{
-    res.send(user.bookings);
+  Booking.find({client : req.userToken.id}).populate('place').populate('owner')
+  .then( (bookings) =>{
+    res.send(bookings);
   })
   .catch(err => {
     res.status(400).send(err)
   })
 }
 exports.getMyBookingsOwner = (req, res) =>{
-  User.findById(req.userToken.id).populate('bookingsOwner')
-  .then( (user) =>{
-    res.send(user.bookingsOwner);
+  Booking.find({owner : req.userToken.id}).populate('place').populate('client')
+  .then( (bookings) =>{
+    res.send(bookings);
   })
   .catch(err => {
     res.status(400).send(err)
